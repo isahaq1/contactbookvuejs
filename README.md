@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+cd contact-book
 ```
 
 ### Compiles and hot-reloads for development
