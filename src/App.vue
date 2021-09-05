@@ -37,6 +37,9 @@ export default {
         this.contacts = [...this.contacts, newContact];
     },
     deleteContactItem(id){
+       axios
+      .post('http://localhost/saleserp_v9.8/api/delete_contact/{id}')
+      .then(response => (console.log(response.data.message)))
       this.contacts = this.contacts.filter(contact => contact.id !== id);
     },
     editContactItem(id){
