@@ -11,6 +11,8 @@
 import Contacts from "./components/Contacts";
 import AddContactItem from "./components/AddContactItem";
 
+import axios from 'axios';
+
 export default {
   name: 'App',
   components: {
@@ -19,14 +21,14 @@ export default {
   },
   data () {
     return {
-      contacts: [],
+      contacts   : [],
       editContact: {
-        title: '',
-        phone:'',
-        company:'',
-        address:'',
-        created_at:'',
-        id: ''
+      title      : '',
+      phone      : '',
+      company    : '',
+      address    : '',
+      created_at : '',
+      id         : ''
       }
     }
   },
@@ -40,18 +42,18 @@ export default {
     editContactItem(id){
       //find the index of the contact's id
       let objIndex = this.contacts.findIndex(obj=> obj.id === id);
-      this.editContact.title = this.contacts[objIndex].title;
-      this.editContact.phone = this.contacts[objIndex].phone;
+      this.editContact.title   = this.contacts[objIndex].title;
+      this.editContact.phone   = this.contacts[objIndex].phone;
       this.editContact.company = this.contacts[objIndex].company;
       this.editContact.address = this.contacts[objIndex].address;
-      this.editContact.id = id;
+      this.editContact.id      = id;
     },
     editContactItemEvent(contactItem){
       //find the index of this id's object
       let objIndex = this.contacts.findIndex(obj => obj.id === contactItem.id)
       //update the item
-      this.contacts[objIndex].title = contactItem.title;
-      this.contacts[objIndex].phone = contactItem.phone;
+      this.contacts[objIndex].title   = contactItem.title;
+      this.contacts[objIndex].phone   = contactItem.phone;
       this.contacts[objIndex].company = contactItem.company;
       this.contacts[objIndex].address = contactItem.address;
       this.contacts[objIndex].updated_at = new Date();
@@ -60,15 +62,20 @@ export default {
   watch: {
     contacts: {
       handler() {
-        localStorage.setItem('contacts',JSON.stringify(this.contacts))
+        // localStorage.setItem('contacts',JSON.stringify(this.contacts))
+
+      
+          axios
+      .post('http://localhost/saleserp_v9.8/api/add_contact',this.contacts)
+      .then(response => (console.log(response)))
       },
       deep: true
     }
   },
   mounted() {
-    if (localStorage.getItem("contacts")){
-      this.contacts = JSON.parse(localStorage.getItem("contacts"))
-    }
+      axios
+      .get('http://localhost/saleserp_v9.8/api/contact_list')
+      .then(response => (this.contacts = response.data.contacts))
   }
 }
 </script>

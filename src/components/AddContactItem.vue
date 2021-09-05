@@ -1,8 +1,6 @@
 <template>
     <div>
-    
-
-<form @submit="addContact">
+    <form @submit="addContact">
   <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-4">
@@ -58,10 +56,10 @@
                    // add contact
                     const newContact = {
                         title: this.title,
-                         phone: this.phone,
-                         company: this.company,
-                         address: this.address,
-                         created_at: new Date(),
+                        phone: this.phone,
+                        company: this.company,
+                        address: this.address,
+                        created_at: new Date(),
                         id: Math.floor(Math.random() * 100)
                     };
                     if (newContact.title !== ''){
@@ -72,11 +70,11 @@
                     //edit contact
                     const contactItem = {
                         title: this.title,
-                         phone: this.phone,
-                         company: this.company,
-                         address: this.address,
-                         created_at: new Date(),
-                         updated_at:'',
+                        phone: this.phone,
+                        company: this.company,
+                        address: this.address,
+                        created_at: new Date(),
+                        updated_at:'',
                         id: this.id
                     };
                     //send to parent (App.vue)
